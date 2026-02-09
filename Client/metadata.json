@@ -1,0 +1,5 @@
+{
+  "name": "Generic Hub",
+  "description": "A web application to browse, compare, and manage generic medicines. It features a customer-facing interface for searching and comparing medicines, and an admin panel for managing the medicine inventory.",
+  "requestFramePermissions": []
+}

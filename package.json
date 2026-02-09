@@ -1,0 +1,25 @@
+{
+  "name": "generic-hub",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "dev": "start-server-and-test dev:server http://localhost:5000 dev:client"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/multer": "^2.0.0",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "start-server-and-test": "^2.1.2"
+  },
+  "dependencies": {
+    "mongoose": "^8.19.1",
+    "multer": "^2.0.2"
+  }
+}

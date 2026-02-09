@@ -1,0 +1,141 @@
+/* Animated Navigation Item */
+.nav-item {
+  position: relative;
+  padding: 8px 16px;
+  color: #343A40; /* dark color */
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.4s ease-in-out;
+  overflow: hidden;
+}
+
+.dark .nav-item {
+  color: #F8F9FA; /* light color */
+}
+
+.nav-item::before, .nav-item::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #17A2B8; /* secondary color */
+  border-radius: 8px;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.nav-item::before {
+  transform: scaleX(0);
+  transition: transform 0.4s ease-in-out;
+  transform-origin: left;
+}
+
+.nav-item::after {
+  transform: scaleX(0);
+  transition: transform 0.4s 0.2s ease-in-out;
+  transform-origin: right;
+}
+
+.nav-item:hover {
+  color: #17A2B8;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(23, 162, 184, 0.3);
+}
+
+.nav-item:hover::before, .nav-item:hover::after {
+  transform: scaleX(1);
+}
+
+.nav-item.active {
+  color: #17A2B8;
+  border-color: #17A2B8;
+  background: rgba(23, 162, 184, 0.1);
+}
+
+/* Secondary Login Button */
+.login-btn {
+  padding: 8px 16px;
+  color: #007BFF; /* primary color */
+  border: 1px solid #007BFF;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  background-color: transparent;
+}
+
+.dark .login-btn {
+  color: #38bdf8; /* a lighter blue for dark mode */
+  border-color: #38bdf8;
+}
+
+.login-btn:hover {
+  background-color: #007BFF;
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+}
+
+.dark .login-btn:hover {
+  background-color: #38bdf8;
+  color: #1f2937; /* dark gray text */
+}
+
+/* Special Animated Sign Up Button */
+.signup-btn-animated {
+  padding: 9px 18px;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 500;
+  text-decoration: none;
+  background-image: linear-gradient(to right, #8A2387, #E94057, #F27121);
+  background-size: 200% auto;
+  transition: all 0.4s cubic-bezier(.25,.8,.25,1);
+  box-shadow: 0 4px 15px 0 rgba(233, 64, 87, 0.3);
+  position: relative;
+}
+
+.signup-btn-animated:hover {
+  background-position: right center; /* change the direction of the change here */
+  box-shadow: 0 10px 20px rgba(233, 64, 87, 0.4);
+  transform: scale(1.05);
+}
+
+/* User Dropdown Animation */
+.user-dropdown {
+  transform-origin: top right;
+  animation: growDown 0.2s ease-out forwards;
+}
+
+@keyframes growDown {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Mobile Menu Animation */
+.mobile-nav {
+  transform-origin: top;
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

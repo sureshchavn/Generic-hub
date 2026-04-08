@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generic Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: '#007BFF',
+              secondary: '#17A2B8',
+              accent: '#28A745',
+              danger: '#DC3545',
+              light: '#F8F9FA',
+              dark: '#343A40',
+            },
+            fontFamily: {
+              sans: ['Poppins', 'sans-serif'],
+            },
+          },
+        },
+      }
+    </script>
+    <style>
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .fade-in-image {
+        opacity: 0; /* Start hidden for animation */
+        animation: fadeIn 0.8s ease-out forwards;
+      }
+    </style>
+
+<link rel="stylesheet" href="/index.css">
+  <script type="importmap">
+{
+  "imports": {
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react": "https://aistudiocdn.com/react@^19.1.1"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/assets/index-H6d2hui9.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DKvSh8tJ.css">
+</head>
+  <body class="bg-light text-dark dark:bg-gray-900 dark:text-gray-200 transition-colors duration-300">
+    <div id="root"></div>
+  </body>
+</html>

@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
-import { connectDB } from "./config/db.js";
-import medicineRoutes from "./routes/medicineRoutes.js";
+import { connectDB } from "./config/db";
+import medicineRoutes from "./routes/medicineRoutes";
 
 dotenv.config();
 connectDB();
@@ -20,4 +20,4 @@ app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 app.use("/api/medicines", medicineRoutes);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(` Server running on port ${PORT}`));

@@ -49,18 +49,21 @@ const HomePage: React.FC = () => {
 
     // Updated filtering logic to handle both search and category
     const filteredMedicines = useMemo(() => {
-        return medicines.filter(med => {
-            const matchesSearch = !searchTerm ||
-                med.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                med.genericName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                med.manufacturer.toLowerCase().includes(searchTerm.toLowerCase());
+    return medicines.filter((med) => {
+        const search = searchTerm.toLowerCase();
 
-            const matchesCategory = selectedCategory === 'All' || med.category === selectedCategory;
+        const matchesSearch =
+        !searchTerm ||
+        med.name?.toLowerCase().includes(search) ||
+        med.genericName?.toLowerCase().includes(search) ||
+        med.manufacturer?.toLowerCase().includes(search);
 
-            return matchesSearch && matchesCategory;
-        });
+        const matchesCategory =
+        selectedCategory === "All" || med.category === selectedCategory;
+
+        return matchesSearch && matchesCategory;
+    });
     }, [medicines, searchTerm, selectedCategory]);
-
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-gray-950">
 
@@ -121,7 +124,7 @@ const HomePage: React.FC = () => {
                             <div className="absolute -top-10 -right-10 w-64 h-64 bg-teal-200/50 dark:bg-teal-900/20 rounded-full blur-3xl -z-10"></div>
                             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white dark:border-gray-800 transform rotate-2">
                                 <img
-                                    src="/assets/home.jpeg"
+                                    src="src/assets/home.jpeg"
                                     alt="Pharmacy setup"
                                     className="w-full h-auto object-cover"
                                 />
@@ -173,7 +176,9 @@ const HomePage: React.FC = () => {
             {/* --- ADDED SECTION: DISEASE CATEGORIES --- */}
             <section className="container mx-auto px-6 pt-16">
                 <div className="mb-8">
-                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Browse by Dieases</h2>
+                    <h2 className="text-2xl font-bold">
+                        Browse by Diseases
+                    </h2>
                     <p className="text-gray-500 text-sm">Select a category to see specific medicine alternatives</p>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">

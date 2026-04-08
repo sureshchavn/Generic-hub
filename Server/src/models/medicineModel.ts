@@ -15,4 +15,3 @@ const medicineSchema = new Schema<IMedicine>({
 });
 
 export const Medicine = mongoose.model<IMedicine>("Medicine", medicineSchema);
-44444444444444444444444444444444444444444444444444444444444444444444444444

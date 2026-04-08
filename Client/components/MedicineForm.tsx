@@ -16,9 +16,11 @@ const MedicineForm: React.FC<MedicineFormProps> = ({ onSubmit, onClose, initialD
     manufacturer: '',
     price: 0,
     stock: 0,
-    imageUrl: 'https://cse.google.com/cse?cx=e369c9e3ea80f4128',
+    imageUrl: '',
     description: '',
     discount: 0,
+    disease: '',
+    category: '',
   });
 
   useEffect(() => {
@@ -32,6 +34,8 @@ const MedicineForm: React.FC<MedicineFormProps> = ({ onSubmit, onClose, initialD
         imageUrl: initialData.imageUrl,
         description: initialData.description,
         discount: initialData.discount,
+        disease: initialData.disease,
+        category: initialData.category,
       });
     }
   }, [initialData]);
@@ -66,8 +70,16 @@ const MedicineForm: React.FC<MedicineFormProps> = ({ onSubmit, onClose, initialD
         <input type="text" name="manufacturer" id="manufacturer" value={formData.manufacturer} onChange={handleChange} className={inputClass} required />
       </div>
       <div>
+        <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Image URL</label>
+        <input type="url" name="imageUrl" id="imageUrl" value={formData.imageUrl} onChange={handleChange} className={inputClass} required />
+      </div>
+      <div>
         <label htmlFor="disease" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Disease</label>
         <input type="text" name="disease" id="disease" value={formData.disease} onChange={handleChange} className={inputClass} required />
+      </div>
+      <div>
+        <label htmlFor="category" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Category</label>
+        <input type="text" name="category" id="category" value={formData.category} onChange={handleChange} className={inputClass} required />
       </div>
       <div>
         <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Description</label>

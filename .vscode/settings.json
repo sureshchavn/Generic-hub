@@ -1,5 +1,9 @@
 {
     "git.ignoreLimitWarning": true,
-    "liveServer.settings.multiRootWorkspaceName": "generic-hub"
+    "liveServer.settings.multiRootWorkspaceName": "generic-hub",
+    "cSpell.words": [
+        "Panadol",
+        "Uncompromised"
+    ]
    
 }

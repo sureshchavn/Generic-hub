@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
-import { connectDB } from "./config/db";
-import medicineRoutes from "./routes/medicineRoutes";
+import { connectDB } from "./src/config/db.js";
+import medicineRoutes from "./src/routes/medicineRoutes.js";
 
 dotenv.config();
 connectDB();

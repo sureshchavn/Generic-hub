@@ -8,7 +8,7 @@ const MedicineDetailPage: React.FC = () => {
   const { getMedicineById } = useMedicines();
   const { user } = useAuth();
 
-  const medicine = id ? getMedicineById(id) : undefined;
+  const medicine = id ? getMedicineById(Number(id)) : undefined;
 
   if (!medicine) {
     return (

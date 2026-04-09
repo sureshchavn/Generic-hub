@@ -33,7 +33,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 1,
     disease: "Diabetes",
-    disesase: "Diabetes",
     name: "Metformin",
     genericName: "Metformin Hydrochloride",
     manufacturer: "Cipla",
@@ -48,7 +47,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 2,
     disease: "Diabetes",
-    disesase: "Diabetes",
     name: "Gliclazide Tablet",
     genericName: "Gliclazide",
     manufacturer: "Dr Reddy's",
@@ -63,7 +61,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 3,
     disease: "Heart",
-    disesase: "Heart",
     name: "Aspirin",
     genericName: "Acetylsalicylic Acid",
     manufacturer: "Bayer",
@@ -78,7 +75,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 4,
     disease: "Pain Relief",
-    disesase: "Pain Relief",
     name: "Ibuprofen",
     genericName: "Ibuprofen",
     manufacturer: "Abbott",
@@ -93,7 +89,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 5,
     disease: "Respiratory",
-    disesase: "Respiratory",
     name: "Montelukast",
     genericName: "Montelukast Sodium",
     manufacturer: "Lupin",
@@ -108,7 +103,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 6,
     disease: "Neurology",
-    disesase: "Neurology",
     name: "Clonazepam",
     genericName: "Clonazepam",
     manufacturer: "Roche",
@@ -123,7 +117,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 7,
     disease: "Diabetes",
-    disesase: "Diabetes",
     name: "Steglatro",
     genericName: "Ertugliflozin",
     manufacturer: "MSD",
@@ -138,7 +131,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 8,
     disease: "Diabetes",
-    disesase: "Diabetes",
     name: "Teneza-M",
     genericName: "Teneligliptin + Metformin",
     manufacturer: "Glenmark",
@@ -155,7 +147,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 9,
     disease: "Heart",
-    disesase: "Heart",
     name: "Atorvastatin",
     genericName: "Atorvastatin Calcium",
     manufacturer: "Pfizer",
@@ -170,7 +161,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 10,
     disease: "Heart",
-    disesase: "Heart",
     name: "Furosemide",
     genericName: "Furosemide",
     manufacturer: "Sanofi",
@@ -185,7 +175,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 11,
     disease: "Heart",
-    disesase: "Heart",
     name: "Lisinopril",
     genericName: "Lisinopril",
     manufacturer: "Zydus",
@@ -200,7 +189,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 12,
     disease: "Heart",
-    disesase: "Heart",
     name: "Metoprolol",
     genericName: "Metoprolol Tartrate",
     manufacturer: "AstraZeneca",
@@ -217,7 +205,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 13,
     disease: "Neurology",
-    disesase: "Neurology",
     name: "Citicoline & Piracetam",
     genericName: "Citicoline + Piracetam",
     manufacturer: "Intas",
@@ -232,7 +219,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 14,
     disease: "Neurology",
-    disesase: "Neurology",
     name: "Fluvoxamine",
     genericName: "Fluvoxamine Maleate",
     manufacturer: "Abbott",
@@ -247,7 +233,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 15,
     disease: "Neurology",
-    disesase: "Neurology",
     name: "Neuro-MPG",
     genericName: "Methylcobalamin + Pregabalin",
     manufacturer: "Sun Pharma",
@@ -264,7 +249,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 16,
     disease: "Pain Relief",
-    disesase: "Pain Relief",
     name: "Acetaminophen",
     genericName: "Paracetamol",
     manufacturer: "GSK",
@@ -279,7 +263,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 17,
     disease: "Pain Relief",
-    disesase: "Pain Relief",
     name: "Diclofenac",
     genericName: "Diclofenac Sodium",
     manufacturer: "Novartis",
@@ -294,7 +277,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 18,
     disease: "Pain Relief",
-    disesase: "Pain Relief",
     name: "Naproxen",
     genericName: "Naproxen Sodium",
     manufacturer: "Sun Pharma",
@@ -309,7 +291,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 19,
     disease: "Pain Relief",
-    disesase: "Pain Relief",
     name: "Tramadol",
     genericName: "Tramadol Hydrochloride",
     manufacturer: "Cipla",
@@ -326,7 +307,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 20,
     disease: "Respiratory",
-    disesase: "Respiratory",
     name: "Albuterol",
     genericName: "Salbutamol",
     manufacturer: "Ventolin",
@@ -341,7 +321,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 21,
     disease: "Respiratory",
-    disesase: "Respiratory",
     name: "Budesonide",
     genericName: "Budesonide",
     manufacturer: "Pulmicort",
@@ -356,7 +335,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 22,
     disease: "Respiratory",
-    disesase: "Respiratory",
     name: "Fluticasone",
     genericName: "Fluticasone Propionate",
     manufacturer: "Glaxo",
@@ -371,7 +349,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 23,
     disease: "Respiratory",
-    disesase: "Respiratory",
     name: "Prednisone",
     genericName: "Prednisone",
     manufacturer: "Wysolone",
@@ -386,7 +363,6 @@ export const MOCK_MEDICINES: Medicine[] = [
   {
     id: 24,
     disease: "Respiratory",
-    disesase: "Respiratory",
     name: "Albuterol",
     genericName: "Albuterol",
     manufacturer: "Wysolone",

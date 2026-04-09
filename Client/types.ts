@@ -1,7 +1,6 @@
 export interface Medicine {
   id: number;
   disease: any;
-  disesase: any;
   name: string;
   genericName: string;
   manufacturer: string;

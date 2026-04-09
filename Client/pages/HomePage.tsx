@@ -113,7 +113,7 @@ const HomePage: React.FC = () => {
                                     type="text"
                                     placeholder="Search medicine (e.g. Panadol, Metformin...)"
                                     value={searchTerm}
-                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
                                     className="w-full pl-12 pr-4 py-5 bg-white dark:bg-gray-800 border-none shadow-xl rounded-2xl focus:ring-2 focus:ring-teal-500 outline-none dark:text-white text-lg transition-all"
                                 />
                             </div>

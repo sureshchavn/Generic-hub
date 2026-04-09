@@ -6,8 +6,8 @@ interface MedicineContextType {
   medicines: Medicine[];
   addMedicine: (medicine: Omit<Medicine, 'id' | 'finalPrice'>) => void;
   updateMedicine: (medicine: Medicine) => void;
-  deleteMedicine: (id: string) => void;
-  getMedicineById: (id: string) => Medicine | undefined;
+  deleteMedicine: (id: number) => void;
+  getMedicineById: (id: number) => Medicine | undefined;
 }
 
 const MedicineContext = createContext<MedicineContextType | undefined>(undefined);
@@ -48,11 +48,11 @@ export const MedicineProvider: React.FC<{ children: ReactNode }> = ({ children }
     );
   }, []);
 
-  const deleteMedicine = useCallback((id: string) => {
+  const deleteMedicine = useCallback((id: number) => {
     setMedicines(prev => prev.filter(m => m.id !== id));
   }, []);
 
-  const getMedicineById = useCallback((id: string) => medicines.find(m => m.id === id), [medicines]);
+  const getMedicineById = useCallback((id: number) => medicines.find(m => m.id === id), [medicines]);
 
   return (
     <MedicineContext.Provider value={{ medicines, addMedicine, updateMedicine, deleteMedicine, getMedicineById }}>

@@ -1,4 +1,5 @@
 {
+  "homepage": "https://sureshchavn.github.io/Generic-hub",
   "name": "generic-hub",
   "version": "1.0.0",
   "main": "index.js",
@@ -6,7 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev:server": "cd server && npm run dev",
     "dev:client": "cd client && npm run dev",
-    "dev": "start-server-and-test dev:server http://localhost:5000 dev:client"
+    "dev": "start-server-and-test dev:server http://localhost:5000 dev:client",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "keywords": [],
   "author": "",

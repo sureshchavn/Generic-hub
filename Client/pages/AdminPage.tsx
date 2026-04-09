@@ -28,14 +28,17 @@ const AdminPage: React.FC = () => {
 
   const handleFormSubmit = (data: Omit<Medicine, 'id' | 'finalPrice'>) => {
     if (editingMedicine) {
-      updateMedicine({ ...data, id: editingMedicine.id });
+      updateMedicine({
+        ...data, id: editingMedicine.id,
+        finalPrice: 0
+      });
     } else {
       addMedicine(data);
     }
     closeModal();
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: number) => {
     if (window.confirm('Are you sure you want to delete this medicine?')) {
       deleteMedicine(id);
     }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import API from '@/src/api';
 
 interface Medicine {
   _id: string;

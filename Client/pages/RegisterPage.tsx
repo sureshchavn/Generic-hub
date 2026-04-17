@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Logo from '../components/Logo';
 import { EyeIcon, EyeOffIcon } from '../components/icons';
+import API from '@/src/api';
 
 const RegisterPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -64,26 +65,30 @@ const RegisterPage: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setApiError('');
-    if (validate()) {
-      const { success, message } = register({
-          fullName: formData.fullName,
-          username: formData.username,
-          email: formData.email,
-          phone: formData.phone,
-          age: parseInt(formData.age, 10),
-      }, formData.password);
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setApiError("");
 
-      if (success) {
-        // Redirect to login page with a success message
-        navigate('/login', { state: { message: 'Account created successfully! Please sign in.' } });
-      } else {
-        setApiError(message);
-      }
+  if (validate()) {
+    try {
+      await API.post("/auth/register", {
+        name: formData.fullName,
+        username: formData.username,
+        email: formData.email,
+        phone: formData.phone,
+        age: parseInt(formData.age, 10),
+        password: formData.password
+      });
+
+      alert("Registered Successfully ✅");
+      navigate("/login");
+
+    } catch (err) {
+      console.log(err);
+      setApiError("Registration Failed ❌");
     }
-  };
+  }
+};
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

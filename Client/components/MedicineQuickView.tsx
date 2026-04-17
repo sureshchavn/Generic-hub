@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Medicine } from '../types';
 import { useAuth } from '../context/AuthContext';
+import API from '@/src/api';
 
 interface MedicineQuickViewProps {
   medicine: Medicine;

@@ -14,7 +14,7 @@ const MedicineCard: React.FC<MedicineCardProps> = ({ medicine, onQuickView }) =>
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col justify-between transform hover:-translate-y-1 transition-transform duration-300">
-      <Link to={`/medicine/${medicine.id}`} className="block text-current hover:no-underline flex-grow">
+      <Link to={`/medicine/${medicine.id}`} className="block text-current hover:no-underline grow">
         <div className="relative">
           <img src={medicine.imageUrl} alt={medicine.name} className="w-full h-48 object-cover" />
         {medicine.discount > 0 && (

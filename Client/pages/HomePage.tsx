@@ -21,9 +21,10 @@ import {
     Thermometer,
     Activity
 } from 'lucide-react';
+import API from '@/src/api';
 
 const HomePage: React.FC = () => {
-    const { medicines } = useMedicines();
+    const [medicines, setMedicines] = useState<Medicine[]>([]);
     const { user } = useAuth();
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All'); // New State
@@ -37,6 +38,29 @@ const HomePage: React.FC = () => {
         }
     }, [user]);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await API.get("/medicines");
+
+                const formatted = Array.isArray(res.data)
+                    ? res.data.map((m: any) => ({
+                        ...m,
+                        id: m._id
+                    }))
+                    : [];
+
+                setMedicines(formatted);
+
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+
     // CATEGORY DATA
     const categories = [
         { name: 'All', icon: <Activity size={20} />, color: 'bg-blue-500' },
@@ -49,20 +73,20 @@ const HomePage: React.FC = () => {
 
     // Updated filtering logic to handle both search and category
     const filteredMedicines = useMemo(() => {
-    return medicines.filter((med) => {
-        const search = searchTerm.toLowerCase();
+        return medicines.filter((med: any) => {
+            const search = searchTerm.toLowerCase();
 
-        const matchesSearch =
-        !searchTerm ||
-        med.name?.toLowerCase().includes(search) ||
-        med.genericName?.toLowerCase().includes(search) ||
-        med.manufacturer?.toLowerCase().includes(search);
+            const matchesSearch =
+                !searchTerm ||
+                med?.name?.toLowerCase()?.includes(search) ||
+                med?.genericName?.toLowerCase()?.includes(search) ||
+                med?.manufacturer?.toLowerCase()?.includes(search);
 
-        const matchesCategory =
-        selectedCategory === "All" || med.category === selectedCategory;
+            const matchesCategory =
+                selectedCategory === "All" || med?.category === selectedCategory;
 
-        return matchesSearch && matchesCategory;
-    });
+            return matchesSearch && matchesCategory;
+        });
     }, [medicines, searchTerm, selectedCategory]);
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-gray-950">
@@ -187,8 +211,8 @@ const HomePage: React.FC = () => {
                             key={cat.name}
                             onClick={() => setSelectedCategory(cat.name)}
                             className={`flex flex-col items-center justify-center p-6 rounded-2xl border-2 transition-all duration-200 ${selectedCategory === cat.name
-                                    ? 'border-teal-500 bg-teal-50 dark:bg-teal-900/20 text-teal-600 shadow-md scale-105'
-                                    : 'border-transparent bg-white dark:bg-gray-900 hover:border-gray-200 dark:hover:border-gray-700 shadow-sm'
+                                ? 'border-teal-500 bg-teal-50 dark:bg-teal-900/20 text-teal-600 shadow-md scale-105'
+                                : 'border-transparent bg-white dark:bg-gray-900 hover:border-gray-200 dark:hover:border-gray-700 shadow-sm'
                                 }`}
                         >
                             <div className={`mb-3 p-3 rounded-xl ${selectedCategory === cat.name ? 'bg-teal-500 text-white' : 'bg-slate-100 dark:bg-gray-800 text-slate-600 dark:text-slate-400'}`}>
@@ -217,7 +241,7 @@ const HomePage: React.FC = () => {
 
                 {filteredMedicines.length > 0 ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                        {filteredMedicines.map(medicine => (
+                        {filteredMedicines?.map((medicine: any) => (
                             <div key={medicine.id} className="transition-all duration-300 hover:scale-[1.02]">
                                 <MedicineCard
                                     medicine={medicine}

@@ -1,61 +1,107 @@
-import React, { createContext, useState, useContext, ReactNode, useCallback, useEffect } from 'react';
-import { Medicine } from '../types';
-import { MOCK_MEDICINES } from '../constants';
+import React, {
+  createContext,
+  useState,
+  useContext,
+  ReactNode,
+  useCallback,
+  useEffect
+} from "react";
+import { Medicine } from "../types";
+import API from "@/src/api";
 
 interface MedicineContextType {
   medicines: Medicine[];
-  addMedicine: (medicine: Omit<Medicine, 'id' | 'finalPrice'>) => void;
-  updateMedicine: (medicine: Medicine) => void;
-  deleteMedicine: (id: number) => void;
-  getMedicineById: (id: number) => Medicine | undefined;
+  addMedicine: (medicine: Omit<Medicine, "id" | "finalPrice">) => Promise<void>;
+  updateMedicine: (medicine: Medicine) => Promise<void>;
+  deleteMedicine: (id: string) => Promise<void>;
+  getMedicineById: (id: string) => Medicine | undefined;
 }
 
 const MedicineContext = createContext<MedicineContextType | undefined>(undefined);
 
-const MEDICINES_STORAGE_KEY = 'medicines';
-
 const calculateFinalPrice = (price: number, discount?: number): number => {
-  return price - (price * (discount || 0) / 100);
+  return price - (price * (discount || 0)) / 100;
 };
 
 export const MedicineProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [medicines, setMedicines] = useState<Medicine[]>(() => {
+  const [medicines, setMedicines] = useState<Medicine[]>([]);
+
+  // 🔥 FETCH ALL FROM BACKEND
+  const fetchMedicines = async () => {
     try {
-      const stored = localStorage.getItem(MEDICINES_STORAGE_KEY);
-      if (stored) return JSON.parse(stored);
-    } catch {}
-    return MOCK_MEDICINES.map(m => ({ ...m, finalPrice: calculateFinalPrice(m.price, m.discount) }));
-  });
+      const res = await API.get("/medicines");
+
+      const formatted = res.data.map((m: any) => ({
+        ...m,
+        id: m._id,
+        finalPrice: calculateFinalPrice(m.price, m.discount)
+      }));
+
+      setMedicines(formatted);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
+    fetchMedicines();
+  }, []);
+
+  // 🔥 ADD
+  const addMedicine = useCallback(async (medicine: Omit<Medicine, "id" | "finalPrice">) => {
     try {
-      localStorage.setItem(MEDICINES_STORAGE_KEY, JSON.stringify(medicines));
-    } catch {}
-  }, [medicines]);
+      const res = await API.post("/medicines", medicine);
 
-  const addMedicine = useCallback((medicine: Omit<Medicine, 'id' | 'finalPrice'>) => {
-    const newMed: Medicine = {
-      ...medicine,
-      id: Date.now(), // ✅ number now
-      finalPrice: calculateFinalPrice(medicine.price, medicine.discount),
-    };
-    setMedicines(prev => [...prev, newMed]);
+      const newMed = {
+        ...res.data,
+        id: res.data._id,
+        finalPrice: calculateFinalPrice(res.data.price, res.data.discount)
+      };
+
+      setMedicines(prev => [...prev, newMed]);
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
 
-  const updateMedicine = useCallback((medicine: Medicine) => {
-    setMedicines(prev =>
-      prev.map(m => (m.id === medicine.id ? { ...medicine, finalPrice: calculateFinalPrice(medicine.price, medicine.discount) } : m))
-    );
+  // 🔥 UPDATE
+  const updateMedicine = useCallback(async (medicine: Medicine) => {
+    try {
+      await API.put(`/medicines/${medicine.id}`, medicine);
+
+      setMedicines(prev =>
+        prev.map(m =>
+          m.id === medicine.id
+            ? { ...medicine, finalPrice: calculateFinalPrice(medicine.price, medicine.discount) }
+            : m
+        )
+      );
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
 
-  const deleteMedicine = useCallback((id: number) => {
-    setMedicines(prev => prev.filter(m => m.id !== id));
+  // 🔥 DELETE
+  const deleteMedicine = useCallback(async (id: string) => {
+    try {
+      await API.delete(`/medicines/${id}`);
+
+      setMedicines(prev => prev.filter(m => m.id !== Number(id)));
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
 
-  const getMedicineById = useCallback((id: number) => medicines.find(m => m.id === id), [medicines]);
+  // 🔥 GET SINGLE
+  const getMedicineById = useCallback(
+    (id: string) => medicines.find(m => m.id === Number(id)),
+    [medicines]
+  );
 
   return (
-    <MedicineContext.Provider value={{ medicines, addMedicine, updateMedicine, deleteMedicine, getMedicineById }}>
+    <MedicineContext.Provider
+      value={{ medicines, addMedicine, updateMedicine, deleteMedicine, getMedicineById }}
+    >
       {children}
     </MedicineContext.Provider>
   );
@@ -63,6 +109,6 @@ export const MedicineProvider: React.FC<{ children: ReactNode }> = ({ children }
 
 export const useMedicines = (): MedicineContextType => {
   const context = useContext(MedicineContext);
-  if (!context) throw new Error('useMedicines must be used within a MedicineProvider');
+  if (!context) throw new Error("useMedicines must be used within a MedicineProvider");
   return context;
 };

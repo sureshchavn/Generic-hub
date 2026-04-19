@@ -1,8 +1,12 @@
 const express = require("express");
 const router = express.Router();
+
 const {
   getMedicines,
   addMedicine,
+  getMedicineById,
+  updateMedicine,
+  deleteMedicine  // ✅ add this
 } = require("../controllers/medicineController");
 
 const multer = require("multer");
@@ -15,7 +19,11 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+// ✅ routes
 router.get("/", getMedicines);
-router.post("/", upload.single("image"), addMedicine);
+router.get("/:id", getMedicineById);
+router.post("/", addMedicine);
+router.put("/:id", updateMedicine);
+router.delete("/:id", deleteMedicine);
 
 module.exports = router;

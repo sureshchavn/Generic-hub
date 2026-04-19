@@ -94,7 +94,6 @@ No complex setup or build process is required. To run the project:
 │   └── ThemeContext.tsx
 ├── pages/           # Top-level page components for each route (HomePage, AdminPage, etc.)
 ├── config.ts        # For storing API keys. MUST be gitignored.
-├── constants.ts     # Initial mock data for medicines and stores.
 ├── types.ts         # TypeScript type definitions for the application.
 ├── App.tsx          # Main application component with routing setup.
 ├── index.tsx        # Entry point of the React application.

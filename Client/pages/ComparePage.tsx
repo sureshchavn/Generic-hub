@@ -98,7 +98,7 @@ const ComparePage: React.FC = () => {
                       src={
                         med.imageUrl?.startsWith("http")
                           ? med.imageUrl
-                          : `http://localhost:5000/${med.imageUrl}`
+                          : `http://localhost:5000${medicine.imageUrl}`
                       }
                       alt={med.name}
                       className="w-20 h-20 object-contain mx-auto mb-2"

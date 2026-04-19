@@ -1,15 +1,16 @@
 const Medicine = require("../models/medicineModel");
 
-
-// ✅ GET ALL
+// ================= GET ALL =================
 exports.getMedicines = async (req, res) => {
   try {
-    const meds = await Medicine.find();
+    const med = await Medicine.find();
 
-    // 🔥 normalize _id → id
-    const formatted = meds.map((m) => ({
+    const formatted = med.map((m) => ({
       ...m._doc,
-      id: m._id
+      id: m._id,
+      imageUrl: m.imageUrl
+        ? `${req.protocol}://${req.get("host")}${m.imageUrl}`
+        : ""
     }));
 
     res.json(formatted);
@@ -18,8 +19,7 @@ exports.getMedicines = async (req, res) => {
   }
 };
 
-
-// ✅ GET BY ID
+// ================= GET BY ID =================
 exports.getMedicineById = async (req, res) => {
   try {
     const med = await Medicine.findById(req.params.id);
@@ -30,15 +30,17 @@ exports.getMedicineById = async (req, res) => {
 
     res.json({
       ...med._doc,
-      id: med._id
+      id: med._id,
+      imageUrl: med.imageUrl
+        ? `${req.protocol}://${req.get("host")}${med.imageUrl}`
+        : ""
     });
   } catch (err) {
     res.status(500).json({ msg: "Error fetching medicine" });
   }
 };
 
-
-// ✅ ADD MEDICINE
+// ================= ADD =================
 exports.addMedicine = async (req, res) => {
   try {
     const {
@@ -54,7 +56,15 @@ exports.addMedicine = async (req, res) => {
       imageUrl
     } = req.body;
 
-    // ✅ safe final price
+    // 🔥 HANDLE IMAGE (multer OR JSON)
+    let finalImage = "";
+
+    if (req.file) {
+      finalImage = `/uploads/${req.file.filename}`;
+    } else if (imageUrl) {
+      finalImage = imageUrl;
+    }
+
     const finalPrice =
       discount && discount > 0
         ? price - (price * discount) / 100
@@ -71,12 +81,15 @@ exports.addMedicine = async (req, res) => {
       disease,
       discount,
       finalPrice,
-      imageUrl: imageUrl || ""
+      imageUrl: finalImage
     });
 
     res.json({
       ...med._doc,
-      id: med._id
+      id: med._id,
+      imageUrl: finalImage
+        ? `${req.protocol}://${req.get("host")}${finalImage}`
+        : ""
     });
   } catch (err) {
     console.log(err);
@@ -84,41 +97,45 @@ exports.addMedicine = async (req, res) => {
   }
 };
 
-
-// ✅ UPDATE MEDICINE
+// ================= UPDATE =================
 exports.updateMedicine = async (req, res) => {
   try {
-    const {
-      price,
-      discount
-    } = req.body;
+    const { price, discount } = req.body;
 
-    // 🔥 recalc price
     let finalPrice = price;
     if (discount && discount > 0) {
       finalPrice = price - (price * discount) / 100;
     }
 
+    let updateData = {
+      ...req.body,
+      finalPrice
+    };
+
+    // 🔥 IMAGE UPDATE SUPPORT
+    if (req.file) {
+      updateData.imageUrl = `/uploads/${req.file.filename}`;
+    }
+
     const updated = await Medicine.findByIdAndUpdate(
       req.params.id,
-      {
-        ...req.body,
-        finalPrice
-      },
+      updateData,
       { new: true }
     );
 
     res.json({
       ...updated._doc,
-      id: updated._id
+      id: updated._id,
+      imageUrl: updated.imageUrl
+        ? `${req.protocol}://${req.get("host")}${updated.imageUrl}`
+        : ""
     });
   } catch (err) {
     res.status(500).json({ msg: "Error updating medicine" });
   }
 };
 
-
-// ✅ DELETE MEDICINE
+// ================= DELETE =================
 exports.deleteMedicine = async (req, res) => {
   try {
     await Medicine.findByIdAndDelete(req.params.id);

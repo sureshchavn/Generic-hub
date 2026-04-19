@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 // static upload folder
-app.use("/uploads", express.static("uploads"));
+app.use("/uploads", require("express").static("uploads"));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/medicines", medicineRoutes);

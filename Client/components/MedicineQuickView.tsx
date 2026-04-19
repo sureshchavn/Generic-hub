@@ -16,7 +16,7 @@ const MedicineQuickView: React.FC<MedicineQuickViewProps> = ({ medicine }) => {
       {/* IMAGE SECTION */}
       <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-4 flex items-center justify-center">
         <img
-          src={`http://localhost:5000${medicine.imageUrl}`}
+         src={`http://localhost:5000${medicine.imageUrl}`}
           alt={medicine.name}
           className="w-full h-64 object-contain rounded-lg"
         />

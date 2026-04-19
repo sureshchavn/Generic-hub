@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Medicine } from '../types';
 import { useAuth } from '../context/AuthContext';
-import API from '@/src/api';
 
 interface MedicineQuickViewProps {
   medicine: Medicine;
@@ -12,38 +11,103 @@ const MedicineQuickView: React.FC<MedicineQuickViewProps> = ({ medicine }) => {
   const { user } = useAuth();
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700 dark:text-gray-300">
-      <div>
-        <img src={medicine.imageUrl} alt={medicine.name} className="w-full h-auto rounded-lg object-cover shadow-md" />
-      </div>
-      <div>
-        <h2 className="text-2xl font-bold text-dark dark:text-white mb-1">{medicine.name}</h2>
-        <p className="text-lg text-gray-500 dark:text-gray-400 mb-3">{medicine.genericName}</p>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">By <span className="font-semibold">{medicine.manufacturer}</span></p>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-        <div className="mb-4">
+      {/* IMAGE SECTION */}
+      <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-4 flex items-center justify-center">
+        <img
+          src={`http://localhost:5000${medicine.imageUrl}`}
+          alt={medicine.name}
+          className="w-full h-64 object-contain rounded-lg"
+        />
+      </div>
+
+      {/* DETAILS SECTION */}
+      <div className="flex flex-col justify-between">
+
+        {/* TITLE */}
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+            {medicine.name}
+          </h2>
+
+          <p className="text-md text-gray-500 mt-1">
+            {medicine.genericName}
+          </p>
+
+          <p className="text-sm text-gray-600 mt-2">
+            Manufactured by{" "}
+            <span className="font-semibold">{medicine.manufacturer}</span>
+          </p>
+
+          {/* CATEGORY BADGE */}
+          <div className="mt-3">
+            <span className="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full font-semibold">
+              {medicine.category}
+            </span>
+          </div>
+        </div>
+
+        {/* PRICE SECTION */}
+        <div className="mt-6">
           {medicine.discount > 0 ? (
-            <div className="flex items-baseline gap-3">
-              <span className="text-3xl font-bold text-primary">₹{medicine.finalPrice.toFixed(2)}</span>
-              <span className="text-xl text-gray-500 dark:text-gray-400 line-through">₹{medicine.price.toFixed(2)}</span>
-              <span className="text-sm bg-red-100 text-danger font-semibold px-2 py-1 rounded-md">{medicine.discount}% OFF</span>
+            <div>
+              <div className="flex items-center gap-3">
+                <span className="text-3xl font-bold text-green-600">
+                  ₹{medicine.finalPrice}
+                </span>
+
+                <span className="text-lg line-through text-gray-400">
+                  ₹{medicine.price}
+                </span>
+
+                <span className="bg-red-100 text-red-600 text-xs px-2 py-1 rounded-md font-bold">
+                  {medicine.discount}% OFF
+                </span>
+              </div>
             </div>
           ) : (
-            <p className="text-3xl font-bold text-primary">₹{medicine.price.toFixed(2)}</p>
+            <p className="text-3xl font-bold text-green-600">
+              ₹{medicine.price}
+            </p>
           )}
         </div>
 
-        <span className={`inline-block px-3 py-1 text-sm rounded-full mb-4 ${medicine.stock > 0 ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'}`}>
-          {medicine.stock > 0 ? `${medicine.stock} units in stock` : 'Out of Stock'}
-        </span>
+        {/* STOCK */}
+        <div className="mt-4">
+          <span
+            className={`text-sm px-3 py-1 rounded-full font-semibold ${
+              medicine.stock > 0
+                ? "bg-green-100 text-green-700"
+                : "bg-red-100 text-red-700"
+            }`}
+          >
+            {medicine.stock > 0
+              ? `${medicine.stock} in stock`
+              : "Out of Stock"}
+          </span>
+        </div>
 
-        <p className="leading-relaxed text-sm mb-4">{medicine.description}</p>
+        {/* DESCRIPTION */}
+        <div className="mt-4">
+          <h4 className="font-semibold text-gray-800 dark:text-white mb-1">
+            Description
+          </h4>
+          <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-4">
+            {medicine.description || "No description available"}
+          </p>
+        </div>
 
-        <div className="mt-4 text-sm text-center">
-          <Link to={`/medicine/${medicine.id}`} className="text-primary hover:underline">
-            View Full Details &rarr;
+        {/* BUTTON */}
+        <div className="mt-6">
+          <Link
+            to={`/medicine/${medicine.id}`}
+            className="block text-center bg-primary text-white py-3 rounded-lg font-semibold hover:bg-blue-600 transition"
+          >
+            View Full Details →
           </Link>
         </div>
+
       </div>
     </div>
   );

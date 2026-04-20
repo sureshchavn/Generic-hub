@@ -30,7 +30,12 @@ const MedicineDetailPage: React.FC = () => {
   return (
     <div className="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
       <img
-        src={medicine.imageUrl || "https://via.placeholder.com/300"}
+  src={
+    medicine.imageUrl?.startsWith("http")
+      ? medicine.imageUrl
+      : `http://localhost:5000${medicine.imageUrl}`
+  }
+  alt={medicine.name}
         className="w-full h-64 object-cover rounded"
       />
 
